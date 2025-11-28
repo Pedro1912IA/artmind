@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
+        protocol: 'https',
         hostname: 'artmind.us-east-2.elasticbeanstalk.com',
         port: '',
         pathname: '/**',
