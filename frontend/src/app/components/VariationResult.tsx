@@ -34,7 +34,7 @@ export default function VariationResult({ result }: Props) {
                 if (variation && variation.startsWith('/')) {
                   try {
                     // Fetch the image
-                    const response = await fetch(`https://artmind.us-east-2.elasticbeanstalk.com${variation}`);
+                    const response = await fetch(`/api/proxy?path=${variation}`);
                     const blob = await response.blob();
                     
                     // Create download link
@@ -87,7 +87,7 @@ export default function VariationResult({ result }: Props) {
             <div className="relative aspect-square w-full bg-gray-100 dark:bg-gray-700">
               {variation && variation.startsWith('/') ? (
                 <Image
-                  src={`https://artmind.us-east-2.elasticbeanstalk.com${variation}`}
+                  src={`/api/proxy?path=${variation}`}
                   alt={`Variación ${index + 1}`}
                   fill
                   className="object-cover"
@@ -114,7 +114,7 @@ export default function VariationResult({ result }: Props) {
                   <button
                     onClick={async () => {
                       try {
-                        const response = await fetch(`https://artmind.us-east-2.elasticbeanstalk.com${variation}`);
+                        const response = await fetch(`/api/proxy?path=${variation}`);
                         const blob = await response.blob();
                         const url = window.URL.createObjectURL(blob);
                         const link = document.createElement('a');

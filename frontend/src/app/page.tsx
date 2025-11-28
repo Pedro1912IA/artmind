@@ -49,7 +49,7 @@ export default function Home() {
     formData.append('image', selectedFile);
 
     try {
-      const response = await fetch('https://artmind.us-east-2.elasticbeanstalk.com/api/analyze-art', {
+      const response = await fetch('/api/proxy?endpoint=/api/analyze-art', {
         method: 'POST',
         body: formData,
       });
@@ -147,7 +147,7 @@ export default function Home() {
                   });
 
                   try {
-                    const response = await fetch('https://artmind.us-east-2.elasticbeanstalk.com/api/fingerprint', {
+                    const response = await fetch('/api/proxy?endpoint=/api/fingerprint', {
                       method: 'POST',
                       body: formData,
                     });
@@ -171,7 +171,7 @@ export default function Home() {
                 onClick={async () => {
                   setLoading(true);
                   try {
-                    const response = await fetch('https://artmind.us-east-2.elasticbeanstalk.com/api/create-collection', {
+                    const response = await fetch('/api/proxy?endpoint=/api/create-collection', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',
@@ -214,7 +214,7 @@ export default function Home() {
                   }
                   
                   try {
-                    const response = await fetch('https://artmind.us-east-2.elasticbeanstalk.com/api/variations', {
+                    const response = await fetch('/api/proxy?endpoint=/api/variations', {
                       method: 'POST',
                       body: formData,
                     });
