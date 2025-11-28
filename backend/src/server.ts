@@ -22,10 +22,11 @@ const upload = multer({ storage });
 
 // Middleware
 app.use(cors({
-  origin: '*',
+  origin: ['https://main.d3cwtmj2n19m0s.amplifyapp.com', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  exposedHeaders: ['Content-Disposition']
+  exposedHeaders: ['Content-Disposition'],
+  credentials: true
 }));
 app.use(express.json());
 
@@ -44,6 +45,23 @@ app.use('/generated', express.static('uploads/generated', {
 }));
 
 // Routes
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Art Mind API',
+    status: 'running',
+    version: '1.0.0',
+    endpoints: {
+      api: '/api',
+      test: '/test',
+      health: '/health'
+    }
+  });
+});
+
+app.get('/health', (req, res) => {
+  res.json({ status: 'healthy', timestamp: new Date().toISOString() });
+});
+
 app.use('/api', artRouter);
 app.use('/test', testRouter);
 

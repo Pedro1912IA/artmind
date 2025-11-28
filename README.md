@@ -127,9 +127,53 @@ AI-generated exhibition concepts:
 - Exhibition order
 - Contextualized to your style
 
+## Deployment
+
+### Quick Deployment to AWS
+
+```powershell
+cd backend
+.\setup-eb.ps1
+```
+
+This will deploy your backend to AWS Elastic Beanstalk automatically.
+
+### Deployment Documentation
+
+- **[QUICK_START.md](QUICK_START.md)** - 🚀 Start here for quick deployment
+- **[DEPLOYMENT_SUMMARY.md](DEPLOYMENT_SUMMARY.md)** - 📋 Overview of all deployment files
+- **[DEPLOYMENT_AWS.md](DEPLOYMENT_AWS.md)** - 📖 Complete AWS Elastic Beanstalk guide
+- **[DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md)** - ✅ Step-by-step checklist
+- **[FRONTEND_DEPLOYMENT.md](FRONTEND_DEPLOYMENT.md)** - 🌐 Frontend deployment guide
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - 🏗️ System architecture
+- **[backend/S3_SETUP.md](backend/S3_SETUP.md)** - 📦 S3 configuration for persistent uploads
+
+### Deployment Options
+
+**Backend:**
+- AWS Elastic Beanstalk (recommended)
+- Heroku
+- Railway
+- Render
+
+**Frontend:**
+- Vercel (recommended for Next.js)
+- AWS Amplify
+- Netlify
+- S3 + CloudFront
+
+### Estimated Costs
+
+- **Free Tier**: ~$0.12/month (first year)
+- **Recommended**: ~$16/month (t3.small + Vercel free)
+- **Production**: ~$116/month (with Load Balancer + Vercel Pro)
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed cost breakdown.
+
 ## Notes
 
 - Fingerprints are stored in memory (implement persistent storage for production)
-- Generated images are saved to `uploads/generated/`
+- Generated images are saved to `uploads/generated/` (use S3 for persistence)
 - All AI analysis includes fallback to mock data if API fails
 - Image generation uses Gemini 2.5 Flash Image (Nano Banana)
+- For production, configure S3 for persistent file storage (see [S3_SETUP.md](backend/S3_SETUP.md))

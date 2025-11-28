@@ -49,7 +49,7 @@ export default function Home() {
     formData.append('image', selectedFile);
 
     try {
-      const response = await fetch('http://localhost:3001/api/analyze-art', {
+      const response = await fetch('http://artmind.us-east-2.elasticbeanstalk.com/api/analyze-art', {
         method: 'POST',
         body: formData,
       });
@@ -69,7 +69,16 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800">
       <main className="container mx-auto px-4 py-8">
         <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">Art Mind</h1>
+          <div className="mb-4 flex items-center justify-center gap-4">
+            <Image
+              src="/logoartmind.png"
+              alt="Art Mind Logo"
+              width={60}
+              height={60}
+              className="object-contain"
+            />
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Art Mind</h1>
+          </div>
           <p className="text-lg text-gray-600 dark:text-gray-300">Creative Art Intelligence Platform</p>
         </div>
 
@@ -138,7 +147,7 @@ export default function Home() {
                   });
 
                   try {
-                    const response = await fetch('http://localhost:3001/api/fingerprint', {
+                    const response = await fetch('http://artmind.us-east-2.elasticbeanstalk.com/api/fingerprint', {
                       method: 'POST',
                       body: formData,
                     });
@@ -162,7 +171,7 @@ export default function Home() {
                 onClick={async () => {
                   setLoading(true);
                   try {
-                    const response = await fetch('http://localhost:3001/api/create-collection', {
+                    const response = await fetch('http://artmind.us-east-2.elasticbeanstalk.com/api/create-collection', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',
@@ -205,7 +214,7 @@ export default function Home() {
                   }
                   
                   try {
-                    const response = await fetch('http://localhost:3001/api/variations', {
+                    const response = await fetch('http://artmind.us-east-2.elasticbeanstalk.com/api/variations', {
                       method: 'POST',
                       body: formData,
                     });
