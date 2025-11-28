@@ -106,22 +106,27 @@ export async function generateMultipleImages(
   prompts: string[],
   baseImagePath?: string
 ): Promise<string[]> {
-  const generatedImages: string[] = [];
-
-  for (let i = 0; i < prompts.length; i++) {
-    try {
-      const imagePath = await generateImage({
-        prompt: prompts[i],
-        baseImagePath,
-        outputPath: `variation-${Date.now()}-${i}.png`,
-      });
-      generatedImages.push(imagePath);
-    } catch (error) {
+  console.log(`Generando ${prompts.length} imágenes en paralelo...`);
+  
+  // Generar todas las imágenes en paralelo para reducir el tiempo total
+  const imagePromises = prompts.map((prompt, i) => 
+    generateImage({
+      prompt,
+      baseImagePath,
+      outputPath: `variation-${Date.now()}-${i}.png`,
+    }).catch(error => {
       console.error(`Error generating image ${i + 1}:`, error);
-      // Continuar con las demás imágenes aunque una falle
-    }
-  }
+      return null; // Retornar null si falla, pero continuar con las demás
+    })
+  );
 
+  const results = await Promise.all(imagePromises);
+  
+  // Filtrar los resultados nulos (imágenes que fallaron)
+  const generatedImages = results.filter((img): img is string => img !== null);
+  
+  console.log(`${generatedImages.length} de ${prompts.length} imágenes generadas exitosamente`);
+  
   return generatedImages;
 }
 

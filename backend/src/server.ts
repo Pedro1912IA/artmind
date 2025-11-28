@@ -71,6 +71,11 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+// Aumentar el timeout del servidor para operaciones largas como generación de imágenes
+// 5 minutos (300000ms) para permitir la generación de múltiples imágenes
+server.timeout = 300000;
+server.keepAliveTimeout = 310000; // Debe ser mayor que timeout

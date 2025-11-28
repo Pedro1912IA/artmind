@@ -26,6 +26,7 @@ export async function POST(request: NextRequest) {
       headers: contentType?.includes('application/json') 
         ? { 'Content-Type': 'application/json' }
         : {},
+      signal: AbortSignal.timeout(300000), // 5 minutos timeout para generación de imágenes
     });
 
     const data = await response.json();

@@ -20,6 +20,7 @@ Copy-Item "$source\package.json" -Destination "$tempDir\"
 Copy-Item "$source\Procfile" -Destination "$tempDir\"
 Copy-Item "$source\.npmrc" -Destination "$tempDir\"
 Copy-Item "$source\.ebextensions" -Destination "$tempDir\.ebextensions" -Recurse
+Copy-Item "$source\.platform" -Destination "$tempDir\.platform" -Recurse
 
 # Cambiar al directorio temporal y crear ZIP desde ahí
 Push-Location $tempDir
